@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tamatem Document</title>
+<!-- <meta name="viewport" content="width= device-width", initial-scale="1.0"> -->
+<link rel="stylesheet" href="stylings/document.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link href="stylings/prism.css" rel="stylesheet">
+<script src="./javaSpt/prism.js"></script>
+<script src="./javaSpt/document.js"></script>
+<script src="https://kit.fontawesome.com/6d77083198.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="getCurrentYear()">
+    <div class="sideNav col-3" >
+        <div class="logo" onclick="navigate(event, './pages/tamatemID.html')" >
+        <img src="images/Tamatem_Games_2022_Logo.svg.png" alt="Tamatem Plus Logo" id="logoImg" onclick="navigate(event, './pages/tamatemID.html')">
+        <div class="txtLogo"><span class="txtLogoSPN" onclick="navigate(event, './pages/tamatemID.html')">Tamatem Plus Developer Guide</span>
+        </div>
+        </div>
+        <div class="listOfItems">
+            <ul class="mainUnorderdList">
+                <div class="listItem">
+                <li class="navItem" onclick="showList(event, 'one')" >Unity SDK <img class="downArrow" src="./images/white-right-arrow-png.png" onclick="showList(event, 'one')"></li><!--first item of the main list-->
+                    <ul class="subItemsContainer" id="one" style="display: none;">
+                        <li class="navItem" onclick="navigate(event, './pages/introduction.html')">Introduction</li>
+                        <li class="navItem" onclick="navigate(event, './pages/whereToGetTheSDK.html')">Where to get the SDK?</li>
+                        <li class="navItem" onclick="navigate(event, './pages/howToTestTheConnection.html')">How to test the connection?</li>
+                        <li class="navItem" onclick="navigate(event, './pages/tamatemConnectWorkflow.html')">Tamatem connect workflow</li>
+                        <li class="navItem" onclick="navigate(event, './pages/integrationRequirements.html')">Integration requirements</li>
+                        <li class="navItem" onclick="navigate(event, './pages/functionsAndCallbacks.html')">Available functions & callbacks</li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+        <div class="sideNavFooter">
+        <p>© <span id="currentYear"></span> Tamatem Plus</p>
+        </div>
+        </div>
+        <div id="viewPage">
+            <div class="component">
+                <img src="images/tmtplus-banner.png" alt="Tamatem Plus Banner" style="width: 95%;" class="banner">
+                <span class="title">What is Tamatem ID?</span>
+                <p class="textDescription">Tamatem ID is a user identity for the Tamatem player which provides two primary functions:</p>
+                    <ol>
+                        <li class="">Authentication: The process of verifying a Tamatem identity. This is typically achieved via an email or a mobile number and password.
+                            This ensures that players are who they claim to be before granting them access to their accounts.
+                        </li>
+                        <li class="">Authorization: Once authenticated, the Tamatem platform then asks and determines what resources and data need to be accessed from
+                            the player’s Tamatem ID account. This level of control is essential to maintain the security of user data, the integrity of the system, and
+                            for the next steps through the integration.
+                        </li>
+                    </ol>
+            </div>
+        </div>
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+<link rel="stylesheet" href="../stylings/document.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link href="../stylings/prism.css" rel="stylesheet">
+<script src="../javaSpt/prism.js"></script>
+<script src="../javaSpt/document.js"></script>
+<script src="https://kit.fontawesome.com/6d77083198.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="component">
+        <h3 class="title">Available Functions & Callbacks:</h3>
+        <p class="textDescription">Tamatem Plus SDK allows you to connect your users with the Tamatem ID through our public functions. The following functions can be
+            used by accessing the singleton instance <b>“TamatemConnectPlugin.Instance”</b>:</p>
+            <ol>
+                <li class=""><b>Connect</b>: Call <b>TamatemConnectPlugin.Instance.Connect()</b> to connect the user to Tamatem Plus. You can use the callback function
+                    <b>TamatemConnectPlugin.Instance.OnUserConnected</b>. You can also use the callback function
+                    <b>TamatemConnectPlugin.Instance.OnRedirectedToApp</b> to place any logic needed when the user is redirected to the app during the
+                    connection process.</li>
+                <li class=""><b>GetConnectionStatus</b>: Call <b>TamatemConnectPlugin.Instance.GetConnectionStatus()</b> to check if the user is connected or not. You
+                    can use the callback function <b>TamatemConnectPlugin.Instance.OnGetConnectionStatus</b>.</li>
+                <li class=""><b>GetInventoryItems</b>: Call <b>TamatemConnectPlugin.Instance.GetInventoryItems(string isRedeemed)</b> to get the items purchased by
+                    the user on Tamatem Plus. Send “true” to get the redeemed items, “false” to get the unredeemed items and “all” to get all the items. You
+                    can use the callback function <b>TamatemConnectPlugin.Instance.OnGetInventoryItems</b>.</li>
+                <li class=""><b>RedeemAllItems</b>: Call <b>TamatemConnectPlugin.Instance.RedeemAllItems()</b> to redeem all items. You can use the callback function
+                    <b>TamatemConnectPlugin.Instance.OnAllItemsRedeemed</b>.</li>
+                <li class=""><b>GetUserInfo</b>: Call <b>TamatemConnectPlugin.Instance.GetUserInfo()</b> to get the user data from Tamatem Plus. You can use the callback
+                    function <b>TamatemConnectPlugin.Instance.OnGetUserInfo</b>.
+                    </li>
+                <li class=""><b>Logout</b>: Call <b>TamatemConnectPlugin.Instance.Logout()</b> to clear the Tamatem user session and clear the stored data on the device
+                    (Please note that this will NOT delete the stored data from Tamatem Plus records). You can use the callback function
+                    <b>TamatemConnectPlugin.Instance.OnLogout</b>.
+                    </li>
+                
+            </ol>
+    <div class="information">
+        <i class="fa-solid fa-circle-info" style="color: #0000ff;"></i>
+        You can find an example script to check out how these functions are used. To access this script, please go to Assets →
+        TamatemConnect → Examples→ ExampleScripts → TamatemConnectExampleScript.</div>
+    </div>
+    <h4>You are done!</h4>
+    <div class="done">
+        <i class="fa-solid fa-circle-check" style="color:  #009900;"></i>
+        Now you can provide your players with an outstanding experience while letting us do the heavy lifting for you.
+        </div>
+    <h4>Note</h4>
+    <div class="note"><i class="fa-solid fa-note-sticky" style="color: #b82e8a;" ></i>Please note that the current SDK version uses our testing servers. When you are done with the implementation and everything is
+        working well with you, please contact us to provide you with an updated version of the SDK that is connected to our production
+        server.</div>
+
+</body>
+</html>

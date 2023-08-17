@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+<link rel="stylesheet" href="../stylings/document.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link href="../stylings/prism.css" rel="stylesheet">
+<script src="../javaSpt/prism.js"></script>
+<script src="../javaSpt/document.js"></script>
+<script src="https://kit.fontawesome.com/6d77083198.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="component">
+        <h3 class="title">How to test the connection with Tamatem ID?</h3>
+        <p class="textDescription">Our SDK was built to let you focus on designing an enjoyable experience for your users! Please follow these steps to get started with our
+            example scene:</p>
+            <ol>
+                <li class="">Import the Tamatem Plus SDK Unity Package. You can do that by one of the following methods:
+                    <ol>
+                        <li class="">While having your Unity project open, double-click on the Unity package.</li>
+                        <li class=""> Drag the Unity package and drop it into your Unity project.</li>
+                        <li class="">In your Unity project, from the menu bar, go to Assets → Import Package → Custom Package, then choose our Unity package.</li>
+                    </ol>
+                </li>
+                <li class="">We have the Newtonsoft.Json library included in the package. If you already have it in your project, please exclude it when you import
+                    the package.</li>
+                <li class="">Enter your client ID and redirect URI. From the menu bar, go to Tamatem → Connect Settings, and enter your correct information.<br>
+                    <img src="../images/TamatemConnectSettings.png" alt="" style="width: 50%; margin-bottom: 20px;">
+                </li>
+                <li class="">Open our example scene. In the “Project” tab, Go to TamatemConnect → Example → ExampleScenes and double-click the
+                    ConnectExample scene.
+                    <br>
+                    <img src="../images/ExampleScene.png" alt="" style="width: 50%; margin-bottom: 20px;">
+
+                </li>
+                <li class="">Add the ConnectExample scene to “Scenes in Build” by going to File → Build Settings → Add Open Scenes.<br>
+                    <img src="../images/BuildSettings1.png" alt="" style="width: 50%; margin-bottom: 20px;">
+                </li>
+            </ol>
+            <div class="warning auto-sizing-text ">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>
+                <ul class="ol-warning">
+                    <li class="">Client ID is your game id into Tamatem Plus system, we will provide you with once integration starts.
+                    </li>
+                    <li class="">Redirect URI: The link is the game link where the user will be redirected back after finishing the authorization process to continue
+                        the journey. For a better user experience, we would recommend you use the following format (companynamegamename://companyname).</li>
+                </ul>
+            </div>
+    </div>
+    <div class="component">
+        <h3 class="title">Building the example scene for Android:</h3>
+            <ol>
+                <li class="">From “Build Settings”, under “Platform”, choose Android and click on “Switch Platform”.</li>
+                <li class=""> Go to Player Settings → Other Settings and make sure you change the “Scripting Backend” to “IL2CPP” and include both the “ARMv7”
+                    and “ARM64” Target Architectures.<br>
+                    <img src="../images/PlayerSettingsAndroidV1.1.0.png" alt="" style="width: 90%; margin-bottom: 20px;">
+                </li>
+                <li class="">Go to Player Settings → Publishing Settings and check the Custom Main Manifest option. This will generate a custom manifest file that
+                    you can find in Assets → Plugins → Android. Open this file and add a new <intent-filter>, add the following four lines inside, and save the
+                    file:
+                    <br>
+                    <img src="../images/AndroidPublishingSettings.png" alt="" style="width: 90%; margin-bottom: 20px;">
+                </li>
+                <!-- for the XML code the (`&lt` == `<`) and the (`&gt`==`>`) -->
+                <pre><code class="language-markup">&ltintent-filter&gt
+    &ltaction android:name ="android.intent.action.VIEW" /&gt
+    &ltcategory android:name="android.intent.category.DEFAULT"/&gt
+    &ltcategory android:name ="android.intent.category.BROWSABLE" /&gt
+    &ltdata android:scheme="companyname-gamename" android:host="companyname"/&gt
+&lt/intent-filter&gt </code></pre>
+                <div class="warning" >
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>
+                    Do not forget to replace the “companyname-gamename” and the “companyname” with the actual info that you used in the redirect
+                    URI. Without this you will not be able to complete the connection process.
+                </div>
+                <li class="">Click on Build!</li>
+            </ol>
+    </div>
+    <div class="component">
+        <h3 class="title">Building the example scene for iOS:</h3>
+            <ol>
+                <li class="">From “Build Settings”, under “Platform”, choose Android and click on “Switch Platform”.</li>
+                <li class=""> Go to Player Settings → Other Settings and make sure you change the “Scripting Backend” to “IL2CPP” and include both the “ARMv7”
+                    and “ARM64” Target Architectures.<br>
+                    <img src="../images/PlayerSettingsiOSV1.1.0.png" alt="" style="width: 90%; margin-bottom: 20px;">
+                </li>
+                <li class="">Click on Build and create a new folder for the exported Xcode project.</li>
+                <li class=""> Open the exported Xcode project.</li>
+                <li class="">Under “PROJECT”, go to “Build Settings”, search for “Enable Bitcode” and set it to “No”.</li>
+                <li class="">Under “TARGETS”, click on “Unity-iPhone”, go to “Signing & Capabilities”, enable “Automatically manage signing”, and choose your
+                Team.</li>
+                <li class="">Repeat step no. 5 for both “Unity-iPhone Tests” and “UnityFramework”.</li>
+                <li class="">Connect your iOS device and enable the “Developer Mode”.</li>
+                <li class="">Click on Play in Xcode.</li>
+            </ol>
+    </div>
+</body>
+</html>
