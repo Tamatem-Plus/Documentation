@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+<script src="./javaScript/document.js"></script>
+
+</head>
+<body>
+    <div class="component">
+        <h3 class="title">RESTful Integration</h3>
+        <p class="textDescription">Our Authentication Server is secured using Oauth standards which is used to provide authentication for multiple parties while keeping secure permission-based access to resources.</p>
+        <ul>
+            <li class=""><b>Step 1:</b> Redirect the player to the authorization URL.</li>
+            <li class=""><b>Step 2:</b> An in-game request that takes the Authorization code as a query param and makes an API call to claim a token.</li>
+            <li class=""><b>Step 3:</b> Game keeps the token saved as long as the player is logged in, on logout or token expiry it should be deleted</li>
+        </ul>
+        <p class="textDescription">An important point before starting integration is setting Step 2 up with a URI, that URI weather its a web URL or a deep link within the app needs to be sent to Tamatem Admins and also sent in both Step 1 & Step 2</p>
+
+    </div>
+    <div class="component">
+        <h3 class="title">Authentication</h3>
+        <img src="images/basic_integration.png" alt="Basic Integration" id="basic_integration" style="width: 95%">
+        <h4>Step 1</h4>
+        <p class="textDescription">The game should redirect to a constructed URL, here is a <a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#867c6464-a1a7-4898-804f-422bd165f148" target="_blank">postman example</a>, the URL should contain the following:</p>
+        <ol>
+            <li class=""><b>Portal Domain</b></li>
+            <ul>
+                <li class="">Staging Base URL: <a href="https://alpha-be.tamatemplus.com" target="_blank">https://alpha-be.tamatemplus.com</a></li>
+                <li class="">Production Base URL: <a href="https://admin.tamatemplus.com" target="_blank">https://admin.tamatemplus.com</a></li>
+            </ul>
+            <li class=""><b>EndPoint</b></li>
+            <ul>
+                <li class="">EndPoint: /api/o/authorize</li><!--????????????????????????????????????????????????????-->
+            </ul>
+            <li class=""><b>Params</b></li>
+            <ul>
+                <li class=""><b>client_id: </b>Provided by Tamatem </li>
+                <li class=""><b>response_type: </b>Fixed value “code”</li>
+                <li class=""><b>redirect_uri: </b> Game URI that leads to step2</li>
+                <li class=""><b>code_challenge: </b> As generated following the guide below*</li>
+                <li class=""><b>code_challenge_method: </b> Fixed value “S256”</li>
+            </ul>
+        </ol>
+        <p>*The authorization requires a code challenge to identify that both step requests are from the same source as per oAuth security recommendations, follow this guide for the generation of code challenge & code verifier </p>
+        <h5 class="title">Example</h5>
+        <div class="messageRequest" style="overflow: scroll;">https://alphabe.tamatemplus.com/api/o/authorize?client_id=pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz&response_type=code&redirect_uri=game1://oauth-callback&code_challenge=yTQcr3uzpPhNddaTDWRjXP3vwD0UmNro0PUloyll08o&code_challenge_method=S256</div>
+        <p>Tamatem Portal afterward will redirect the user back to the game redirect URI containing authorization code as a query parameter “code”</p>
+        <h4>Step 2</h4>
+        <p>This API call is triggered by Step 1 as a redirect back to the game, the redirect contains an authorization code, and the game should implement the logic of consuming the received authorization code besides making the API as documented below, here is a postman <a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#d7c05584-138b-4f6b-a11e-4f7308ca38b2" target="_blank">example</a>.</p>
+        <h4>STEP 2 Exchange authorization code</h4>
+        <ul>
+            <li class=""><b>GET   /api/o/get-token/:</b><br>
+                returns access & refresh tokens & user info object</li>
+            <li class=""><b>Header</b><br>
+                {“Content-Type”: “application/json” }</li>
+            <li class=""><b>Response</b><br>
+                <div>Success (Responses Status : 200)</div>
+                <button onclick="copyDivToClipboard('successResponse','successResponseBtn')" class="copyBtn" id="successResponseBtn"><i class="fa-solid fa-copy"></i></button>
+                <pre><code class="language-javascript" id="successResponse">{
+    "results": {
+        "access_token": "iZZSclZlkP2yey4TPTNNNEpUiWkOUZ",
+        "expires_in": 36000,
+        "token_type": "Bearer",
+        "scope": "introspection scoop:read app:read app:write customer:read customer:write game:read game:write",
+        "refresh_token": "TQ2T70CjHvDWy6rQgAulQAmjvGq9MU",
+        "user": {
+            "id": 28,
+            "first_name": "Subhi",
+            "last_name": "Alqudsi",
+            "country": "jordan",
+            "date_of_birth": "2022-05-01",
+            "sign_up_through": "email",
+            "gender": "m",
+            "qr_code": "/media/qr-codes/PL22000005.png",
+            "avatar": null,
+            "tamatem_id": "PL22000005",
+            "game_saved_data": {
+            "exampleKey1": "exampleValue1",
+            "exampleKey2": "exampleValue2",
+            "exampleKey...": "exampleValue...etc"
+            }
+        }
+    },
+    "status_code": 200
+}</code></pre>
+                <div>Incorrect credentials (Reponses Status : 400)</div><button onclick="copyDivToClipboard('incorrectCredentials','incorrectCredentialsBtn')" class="copyBtn" id="incorrectCredentialsBtn"><i class="fa-solid fa-copy"></i></button>
+                <pre><code class="language-javascript" id="incorrectCredentials">{
+    "error": "invalid_grant",
+    "error_description": "Invalid credentials given."
+}</code></pre>
+                <div>Incorrect request (Reponses Status : 400)</div><button onclick="copyDivToClipboard('incorrectRequest','incorrectRequestBtn')" class="copyBtn" id="incorrectRequestBtn"><i class="fa-solid fa-copy" ></i></button>
+                <pre><code class="language-javascript" id="incorrectRequest">{
+    "error": "unsupported_grant_type"
+}</code></pre></li>
+            <li class=""><b>Request Body</b><br>Properties:
+            <table>
+                <tr>
+                    <th>Field Name</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>code</td>
+                    <td>as generated from Step A</td>
+                </tr>
+                <tr>
+                    <td>client_id</td>
+                    <td>string, as set after game creation will be available in portal game details for example ‘pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz’</td>
+                </tr>
+                <tr>
+                    <td>response_type</td>
+                    <td>Static value of ‘code’</td>
+                </tr>
+                <tr>
+                    <td>redirect_uri</td>
+                    <td>string, redirect url as set on game creation on portal for example ‘game1://oauth-callback’</td>
+                </tr>
+                <tr>
+                    <td>code_verifier</td>
+                    <td>string, as generated code challenge for example ‘the other generated code as in guide’</td>
+                </tr>
+                <tr>
+                    <td>code_challenge_method</td>
+                    <td>Static value of ‘S256’</td>
+                </tr>
+                <tr>
+                    <td>grant_type</td>
+                    <td>Static value of ‘authorization_code’</td>
+                </tr>
+                <tr>
+                    <td>scope</td>
+                    <td>Static value of ‘read write’</td>
+                </tr>
+            </table>
+            </li>
+        </ul>
+
+    </div>
+    <div class="component">
+        <h3 class="title">Resource APIs</h3>
+        <ul>
+            <li class=""><a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#3fc00568-8943-453b-b849-8725189ad977" target="_blank">Get Inventory Items </a></li>
+            <p class="textDescription">Returns a list of items, accepts query param to filter out redeemed/non-redeemed items</p>
+
+            <li class=""><a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#9d99da4e-a743-4554-b29e-ba0d27123a94" target="_blank">Connect Player Data</a></li>
+            <p class="textDescription">Updates player-specific data in the form of JSON, for example, the game can save its internal playerID for reference</p>
+
+            <li class=""><a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#97e03805-6ab4-417b-b6fd-9f29f3cb35c7" target="_blank">Get User Info</a></li>
+            <p class="textDescription">Retrieve player data including saved player-specific data </p>
+
+            <li class=""><a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#7d226d53-f7e3-4832-af09-9be1191eaf38" target="_blank">Redeem</a></li>
+            <p class="textDescription">Change item status of an item to redeemed</p>
+
+        </ul>
+        <div class="note"><i class="fa-solid fa-note-sticky" style="color: #b82e8a;"></i>Games that have no backends can rely on this to change the status of an item and rely on Tamatem portal data regarding items and their statuses, on the other hand, games that have a game backend can implement a more secure method of handling this change using a server to server APIs.</div>
+
+    </div>
+
+
+</body>
+</html>

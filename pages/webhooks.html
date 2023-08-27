@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+</head>
+
+<body>
+    <div class="component">
+        <h3 class="title">Redeem Package Purchase Flow</h3>
+        <p class="textDescription">A purchase webhook is requested each time a package is purchased if the response to the purchase webhook is successful. The package’s “is redeem” state in the inventory item table is changed to True. Also, you need to sign the response to verify that the webhook response came from the correct game server. </p>
+    </div>
+    <div class="component">
+        <h4>Setting Up A Webhook</h4>
+        <p class="textDescription">Webhooks require a few configuration options before you can make use of them. We'll go through each of these settings below.</p>
+        <ol>
+            <li class="">Activate Webhook: By activating, the portal side will be responsible for starting the entire redemption flow.</li>
+            <li class="">Configure a webhook API listener in your game server: In order to send a request on it, the game server must give an API endpoint.</li>
+            <li class="">Post Request? : Please provide whether the API endpoint is for a post or a get request.</li>
+        </ol>
+        <div class="information"><i class="fa-solid fa-circle-info" style="color: #0000ff;"></i>To set up a webhook, contact Tamatem Support.</div>
+    </div>
+    <div class="component">
+        <h3 class="title">Webhook Request Payload</h3>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>number</td>
+                <td>Inventory item id</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>String</td>
+                <td>Item name</td>
+            </tr>
+            <tr>
+                <td>package_id</td>
+                <td>number</td>
+                <td>Item package id</td>
+            </tr>
+            <tr>
+                <td>player_serial_number</td>
+                <td>String</td>
+                <td>Player ID inside the game</td>
+            </tr>
+            <tr>
+                <td>player_full_name</td>
+                <td>String</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>game_player_id</td>
+                <td>String</td>
+                <td>Player ID inside the game which is used in the set player id endpoint</td>
+            </tr>
+            <tr>
+                <td>is_redeemed</td>
+                <td>Boolean</td>
+                <td>If the item is redeemed</td>
+            </tr>
+            <tr>
+                <td>is_verified</td>
+                <td>Boolean</td>
+                <td>If the item is verified by a server-to-server signing action - mentioned in the webhook signed response</td>
+            </tr>
+        </table>
+    </div>
+    <div class="component">
+        <h3 class="title">Webhooks Signature</h3>
+        <p class="textDescription">The Tamatem Webhook uses (SHA-256) signed signatures to validate requests before being processed by the API. The following data must be ready before calculating the signature:</p>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Client Secret Key</td>
+                <td>String</td>
+                <td>A unique (private) secret key is provided by the API that will be used to generate unique signatures.</td>
+            </tr>
+            <tr>
+                <td>Timestamp</td>
+                <td>Unix Timestamp</td>
+                <td>The request initiation time, it will be in the header. X-Timestamp</td>
+            </tr>
+            <tr>
+                <td>Encoded Data</td>
+                <td>Base64 Encoded String</td>
+                <td>Encoded JSON string that the server sent as data.</td>
+            </tr>
+            <tr>
+                <td>Request Method</td>
+                <td>POST, GET</td>
+                <td>The type of request that will be made</td>
+            </tr>
+        </table>
+        <div class="warning"><i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>The combination of all these values would guarantee unique signatures between the client and the server, which would make it harder to alter the requests.</div>
+        <p class="textDescription">Signing the request starts with building the message string, which is formatted as follows:</p>
+        <div class="messageRequest">
+            REQUEST_METHOD<br>
+            t=TIMESTAMP&ed=ENCODED_DATA</div> 
+
+    </div>
+    <div class="component">
+        <h4>Calculating The Signature</h4>
+        <p class="textDescription">The signature can be calculated using the (HMAC SHA-256) function.</p>
+        <p class="textDescription">Please follow the following steps to calculate the signature:</p>
+        <ol>
+            <li class="">Encode the data that you received in the API call body.</li>
+            <li class="">Generate the message string.</li>
+            <li class="">Sign the message with your secret key.</li>
+        </ol>
+    </div>
+    <div class="component">
+        <h4>Example</h4>
+        <p class="textDescription">We will sign a Redeem POST request with the below body </p>
+        <button onclick="copyDivToClipboard('redeemPOSTRequest','redeemPOSTRequestBtn')" class="copyBtn" id="redeemPOSTRequestBtn"><i class="fa-solid fa-copy"></i></button>
+        <pre><code class="language-javascript" id="redeemPOSTRequest">{
+    "id":324,
+    "name":"asdasd",
+    "package_id":"MH002",
+    "player_serial_number":"PL22000105",
+    "player_full_name":"Lujain Battikhi",
+    "game_player_id":"",
+    "is_redeemed":false,
+    "is_verified":false,
+    "verification_token": "hTtj86Ph1WF8LMyWKQAegvs7Ls9lNE5vsY8j9gEz90s"
+}</code></pre>
+        <p class="textDescription">These are the steps for signing the webhook response.</p>
+        <h4>Encoding the data</h4>
+        <button onclick="copyDivToClipboard('encodingTheData','encodingTheDataBtn')" class="copyBtn" id="encodingTheDataBtn"><i class="fa-solid fa-copy"></i></button>
+        <pre><code class="language-python" id="encodingTheData">import base64
+#Calculate the HMAC SHA-256 hash of the Data
+data = json_data
+#Important Note: make sure to remove any extra space from the json_data
+encoded_data = base64.b64encode(bytes(data,'utf_8')).decode()</code></pre>
+
+        <h4>Generating the message</h4>
+        <div class="messageRequest">message ='{}\nt={}&ed={}'.format('POST','1554578658',encoded_data)</div> 
+        <h4>Calculate the Signature using HMAC SHA-256</h4>
+        <div class="messageRequest" style="overflow: scroll;">signature = hmac.new(bytes(secret_key,'utf_8'),msg=bytes(message,'utf_8'),digestmod=hashlib.sha256).digest()</div> 
+        <h4>Decode a signature using base64</h4>
+        <div class="messageRequest">response_signature = base64.b64encode(signature).decode()</div> 
+        <h4>Example Signature</h4>
+        <div class="messageRequest">tmO+uDjtClZ0YDEU1oLp1jSpYwNrxPy0lspPSLqIgfc=</div> 
+        <p>Add it to your response.</p>
+        <h4>Webhooks Success Response</h4>
+        <button onclick="copyDivToClipboard('webhooksSuccessResponse','webhooksSuccessResponseBtn')" class="copyBtn" id="webhooksSuccessResponseBtn"><i class="fa-solid fa-copy"></i></button>
+        <pre><code class="language-javascript" id="webhooksSuccessResponse">{
+    'redeem_success': 1,
+    'signature':'tmO+uDjtClZ0YDEU1oLp1jSpYwNrxPy0lspPSLqIgfc='
+}</code></pre>
+
+    </div>
+
+</body>
+</html>

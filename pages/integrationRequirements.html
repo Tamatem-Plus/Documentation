@@ -2,13 +2,6 @@
 <html>
 <head>
 <title>Tamatem Document</title>
-<link rel="stylesheet" href="../stylings/document.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<link href="../stylings/prism.css" rel="stylesheet">
-<script src="../javaSpt/document.js"></script>
-<script src="../javaSpt/prism.js"></script>
-<script src="https://kit.fontawesome.com/6d77083198.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -36,7 +29,8 @@
     </div>
     <div class="component">
         <h3 class="title">Full Code Snippet for the minimum integration</h3>
-        <pre class="language-csharp"><code class="language-csharp">using System.Collections;
+        <button onclick="copyDivToClipboard('integrationFullCode','integrationFullCodeBtn')" class="copyBtn" id="integrationFullCodeBtn"><i class="fa-solid fa-copy"></i></button>
+        <pre class="language-csharp"><code class="language-csharp" id="integrationFullCode">using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TamatemConnect;

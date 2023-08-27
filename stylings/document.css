@@ -1,22 +1,43 @@
 * { 
-    font-size: 14px; 
+    font-size: 16px; 
     font-family: Arial, Helvetica, sans-serif; 
     cursor: default;
     box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+#invisible{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left:0px;
+    top:0px;
+    z-index: 2;
+    /* background-color:rgba(0,0,0,0.2); */
+}
+.forLongWords{
+    display: none;
 }
 
-/* Side navigation bar related stylings */
+/* Side navigation bar related styles */
 .sideNav {
+    display: block;
     float: left;
     height: 100%;
-    min-width: 250px;
+    /* min-width: fit-content; */
+    min-width: 330px;
     background: #212529;
     padding-top: 40px;
     color:white;
-    position:fixed;
+    position: fixed;
+    z-index: 3;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
 }
 .txtLogo{
     cursor: pointer; 
+    font-size: 17px;
 }
 .logo{
     height: fit-content;
@@ -42,13 +63,16 @@
 .navItem{
     position: relative;
     margin-top: 5px;
-    display: block;
     height: fit-content;
     color: white;
     border-radius: 5px;
     padding-right: 5px;
     white-space: nowrap;
     cursor: pointer;
+}
+li.navItem{
+    list-style-type:none;
+
 }
 .downArrow{
     width: 15px;
@@ -71,9 +95,10 @@
     padding: 1rem;
 }
 
-/* View page related stylings */
+/* ************************************** View page styles **************************************** */
 .banner{
     margin-bottom: 30px ;
+    width: 100%;
 }
 #viewPage{
     width: 75%;
@@ -92,12 +117,11 @@
 }
 .title{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
 }
 li{
     margin-top: 5px;
     margin-bottom: 5px;
-
 }
 .auto-sizing-text {
     font-size: min(max(16px, 4vw), 32px);
@@ -106,66 +130,39 @@ i {
     font-size: 18px;
     margin-right: 10px;
 }
-.note{
+/* ************************************** For the notes styles ************************************** */
+.note ,.errorHandling ,.warning ,.information ,.done{
     position: relative;
     width: 95%;
     height: fit-content;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+}
+.note{
     background-color: #f0c2e0 ;
     border-left: 4px #b82e8a solid;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
 }
 .errorHandling{
-    position: relative;
-    width: 95%;
-    height: fit-content;
     background-color: #ffb3b3 ;
     border-left: 4px #ff0000 solid;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
 }
 .warning{
-    position: relative;
-    width: 95%;
-    height: fit-content;
     background-color: #ffe6b3 ;
     border-left: 4px #ffaa00 solid;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
 }
 .information{
-    position: relative;
-    width: 95%;
-    height: fit-content;
     background-color: #ccccff ;
     border-left: 4px #0000ff solid;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
 }
 .done{
-    position: relative;
-    width: 95%;
-    height: fit-content;
     background-color: #b3ffb3 ;
     border-left: 4px #009900 solid;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
 }
+/* ************************************** end notes styles ************************************** */
+
 .rotate {
     transform: rotate(90deg);
 }
@@ -179,3 +176,211 @@ i {
 .active-link {
     text-decoration: underline !important;
 }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    position: relative;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    position: relative;
+
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+    position: relative;
+}
+.messageRequest{
+    border: #ddd 1px solid;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+    width: 90%;
+    padding: 5px;
+    margin: 10px;
+}
+
+h4{
+    font-size: 20px;
+}
+.copyBtn{
+    border:white solid 0px;
+    background-color: #ffffff;
+    color: #212529;
+    position: relative;
+    left: 95%; 
+}
+#showNavBarBtn{
+    display: none;
+    background-color: white;
+    border: white solid 0px;
+    position: absolute;
+    top:10px;
+    left:10px;
+}
+#hideNavBarBtn{
+    display: none;
+    background-color: #212529;
+    border: #212529 solid 0px;
+    position: absolute;
+    display: flex;
+    color: white;
+    font-size: 15px;
+    top: 10px;
+    left: 10px;
+}
+/* ******************************************* media screen ********************************************** */
+/* ************************************** for small screens ******************************************** */
+@media screen and (max-width: 376px) {
+/* p {
+    background-color: lightblue;
+} */
+.forLongWords{
+    display: block;
+}
+#showNavBarBtn{
+    display: block;
+    background-color: white;
+    border: white solid 0px;
+    position: absolute;
+    top:10px;
+    left:10px
+    
+}
+#hideNavBarBtn{
+    display: none;
+    background-color: #212529;
+    border: #212529 solid 0px;
+    position: absolute;
+    display: flex;
+    color: white;
+    font-size: 15px;
+    top: 10px;
+    left: 10px;
+}
+.sideNav{
+    display: none;
+}
+#viewPage{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top:10%;
+    left: 0%;
+    padding-bottom: 20px;
+}
+.banner{
+    margin-bottom: 30px ;
+    width: 100%;
+}
+.messageRequest{
+    overflow: scroll;
+}
+.longString{
+    overflow: scroll;
+}
+.warning{
+    overflow: scroll;
+}
+
+}
+/* ************************************** for medium screens ******************************************** */
+@media screen and (min-width: 376px) and (max-width : 800px){
+/* p {
+    background-color: lightblue;
+} */
+.forLongWords{
+    display: block;
+}
+#showNavBarBtn{
+    display: block;
+    background-color: white;
+    border: white solid 0px;
+    position: absolute;
+    top:10px;
+    left:10px
+    
+}
+#hideNavBarBtn{
+    display: none;
+    background-color: #212529;
+    border: #212529 solid 0px;
+    position: absolute;
+    display: flex;
+    height: 20px;
+}
+.sideNav{
+    display: none;
+}
+#viewPage{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top:10%;
+    left: 0%;
+    padding-bottom: 20px;
+
+}
+.banner{
+    margin-bottom: 30px ;
+    width: 100%;
+}
+
+.messageRequest{
+    overflow: scroll;
+}
+.longString{
+    overflow: scroll;
+}
+.warning{
+    overflow: scroll;
+}
+}
+/* ************************************** for large screens ******************************************** */
+@media screen and (min-width: 801px){
+/* p {
+    background-color: red;
+} */
+.forLongWords{
+    display: none;
+}
+#showNavBarBtn{
+    display: none;
+    background-color: white;
+    border: white solid 0px;
+    position: absolute;
+    top:10px;
+    left:10px
+    
+}
+#hideNavBarBtn{
+    display: none;
+    background-color: #212529;
+    border: #212529 solid 0px;
+    position: absolute;
+    display: flex;
+    height: 20px;
+}
+.sideNav{
+    display: block;
+    float: left;
+    height: 100%;
+    min-width: fit-content;
+    background: #212529;
+    padding-top: 40px;
+    position: fixed;
+    z-index: 3;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;    
+}
+#invisible{
+    display: none;
+    }
+}
+
+    

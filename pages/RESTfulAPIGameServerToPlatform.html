@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+</head>
+
+<body>
+    <div class="component">
+        <h3 class="title">Game-Platform RESTful</h3>
+        <h4>Introduction:</h4>
+        <p class="textDescription">In the following steps is an outline for the verification flow using game server request call into platform server:</p>
+        <ol>
+            <li class="">After redeem from within the game, the game client should make a request to game server carrying both the inventory item id and the verification token as returned from redeem action, variable “verification_token”</li>
+            <li class="">Accordingly, Game server should handle the game request by the following steps, which are also further explained in sections bellow:</li>
+            <ol>
+                <li class="">Login to tamatem portal as game server credentials.</li>
+                <li class="">Verify action.</li>
+            </ol>
+            <li class="">Upon successful status, game server shall update its data/grant item.</li>
+        </ol>
+        <p class="textDescription">We also added an inventory list API so your game can align on status of its purchased inventory.</p>
+    </div>
+    <div class="component">
+        <h4>Verify API</h4>
+        <p class="textDescription">In the following steps is an outline for the verification flow using game server request call into platform server:</p>
+        <ol>
+            <li class="">Inventory item ID.</li>
+            <li class="">The verification token.</li>
+        </ol>
+        <p class="textDescription">Besides that the authentication token as retrieved from the login API should be sent in Authorization, here is a <a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#320febce-d96d-40f0-bd0d-3a6bf369b5d5" target="_blank">postman example</a></p>
+        </div>
+        <div class="component">
+            <h3 class="title">Inventory Items API</h3>
+            <p class="textDescription">Returns a list of inventory item, requires only authentication token in header as taken from Login API,each item of the list has the following parameters:</p>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>number</td>
+                    <td>Inventory Item ID</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>String</td>
+                    <td>Package Name as displays to user</td>
+                </tr>
+                <tr>
+                    <td>game_name</td>
+                    <td>String</td>
+                    <td>Game Name as displays to user</td>
+                </tr>
+                <tr>
+                    <td>code_value</td>
+                    <td>String</td>
+                    <td>Package Code as set by game devs & Tamatem admin</td>
+                </tr>
+                <tr>
+                    <td>player_serial_number</td>
+                    <td>String</td>
+                    <td>Self-explanatory</td>
+                </tr>
+                <tr>
+                    <td>player_full_name</td>
+                    <td>String</td>
+                    <td>Self-explanatory</td>
+                </tr>
+                <tr>
+                    <td>player_user_id</td>
+                    <td>String</td>
+                    <td>Self-explanatory</td>
+                </tr>
+                <tr>
+                    <td>is_redeemed</td>
+                    <td>Boolean</td>
+                    <td>If the item is redeemed</td>
+                </tr>
+                <tr>
+                    <td>is_verified</td>
+                    <td>Boolean</td>
+                    <td>If the item is verified by a server-to-server signing action - mentioned in the webhook signed response</td>
+                </tr>
+            </table>
+
+    </body>
+</html>
