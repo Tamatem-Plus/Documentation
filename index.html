@@ -7,8 +7,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link href="stylings/prism.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/Tamatem_Games_2022_Logo.svg.png">
 <script src="./javaScript/prism.js"></script>
-<script src="./javaScript/document.js"></script>
+<script defer src="./javaScript/document.js"></script>
 <script src="https://kit.fontawesome.com/6d77083198.js" crossorigin="anonymous"></script>
 </head>
 
@@ -16,7 +17,7 @@
     <div id="invisible" onclick="hideNavBar()"></div>
     <button id="showNavBarBtn" onclick="showNavBar()"><i class="fa-solid fa-bars"></i></button> 
     <div class="sideNav col-3" id="sideNavBar">
-        <button id="hideNavBarBtn" onclick="hideNavBar()" style="display: none;"><i class="fa-solid fa-chevron-left" style="font-size: 15px;"></i></button> 
+        <button id="hideNavBarBtn" onclick="hideNavBar()" style="display: none;"><i class="fa-solid fa-arrow-left"></i></button> 
         <div class="logo" onclick="navigate(event, './pages/tamatemID.html')" >
         <img src="images/Tamatem_Games_2022_Logo.svg.png" alt="Tamatem Plus Logo" id="logoImg" onclick="navigate(event, './pages/tamatemID.html')">
         <div class="txtLogo"><span class="txtLogoSPN" onclick="navigate(event, './pages/tamatemID.html')">Tamatem Plus Developer Guide</span>

@@ -1,9 +1,17 @@
-* { 
-    font-size: 16px; 
-    font-family: Arial, Helvetica, sans-serif; 
+@font-face {
+    font-family: 'Madani';
+    src: url('../fontFamily/madani.woff2') format('woff2'),
+         url('../fontFamily/madani.woff') format('woff');
+}
+  * { 
+    /* font-size: 16px;  */
+    font-family: 'Madani', sans-serif;
     cursor: default;
     box-sizing: border-box;
-    overflow-wrap: anywhere;
+}
+p{
+    /* font-family: 'Madani', sans-serif; */
+    /* font-family: Madani , sans-serif; */
 }
 #invisible{
     display: none;
@@ -18,26 +26,51 @@
 .forLongWords{
     display: none;
 }
+.messageRequest{
+    overflow-wrap: anywhere;
 
-/* Side navigation bar related styles */
+}
+#showNavBarBtn{
+    display: none;
+    background-color: inherit;
+    border: inherit solid 0px;
+    position: absolute;
+    top:10px;
+    left:10px;
+}
+#hideNavBarBtn{
+    display: none;
+    background-color: inherit;
+    border: inherit solid 0px;
+    position: absolute;
+    display: flex;
+    color: #c1c2c3;
+    font-size: 15px;
+    top: 20px;
+    left: 86%;
+}
+
+/* **************************** Side navigation bar styles ******************************* */
 .sideNav {
     display: block;
     float: left;
     height: 100%;
     /* min-width: fit-content; */
-    min-width: 330px;
+    min-width: 340px;
     background: #212529;
     padding-top: 40px;
-    color:white;
+    color:#c1c2c3;
     position: fixed;
     z-index: 3;
     top: 0px;
     left: 0px;
     bottom: 0px;
+    font-size: 0.9rem;
 }
 .txtLogo{
     cursor: pointer; 
     font-size: 17px;
+    font-weight: bold;
 }
 .logo{
     height: fit-content;
@@ -46,6 +79,8 @@
     top: 30px;
     left: 30px; 
     cursor: pointer;  
+    padding-bottom: 10px;
+    border-bottom: #ddd 1px solid;
 }
 #logoImg{
     width: 45px;
@@ -64,37 +99,45 @@
     position: relative;
     margin-top: 5px;
     height: fit-content;
-    color: white;
-    border-radius: 5px;
-    padding-right: 5px;
+    color: #c1c2c3;
+    padding:4px 5px ;
     white-space: nowrap;
     cursor: pointer;
+    transition: 0.3s;
+
 }
 li.navItem{
     list-style-type:none;
 
 }
+
+.navItem:hover {
+    white-space: nowrap;
+    background-color: #444;
+    cursor: pointer;
+}
+.active-link {
+    border-left: #00875a solid 5px !important;
+}
 .downArrow{
     width: 15px;
     position: absolute;
     right: 3px;
+    top: 5px;
     cursor: pointer;
     transition: 300ms;
 }
-.navItem:hover {
-    white-space: nowrap;
-    text-decoration: underline;
-    cursor: pointer;
-}
 .sideNavFooter{
-    position: fixed;
+    position: absolute;
     bottom: 5px;
     left: 10px;
 }
 .mainUnorderdList{
     padding: 1rem;
 }
-
+.rotate {
+    transform: rotate(90deg);
+}
 /* ************************************** View page styles **************************************** */
 .banner{
     margin-bottom: 30px ;
@@ -122,15 +165,124 @@ li.navItem{
 li{
     margin-top: 5px;
     margin-bottom: 5px;
+    overflow-wrap: anywhere;
 }
-.auto-sizing-text {
-    font-size: min(max(16px, 4vw), 32px);
+#basic_integration{
+    width: 85%;
+    margin-left: 7%;
+    box-shadow: 0px 0px 3px #888888;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+.github-link{
+    border: #aaa solid 0.5px;
+    border-radius: 5px;
+    padding: 2px;
+    padding-top: 4px;
+    box-shadow: 1px 1px #aaa ;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    position: relative;
+    width: 100%;
+    border: 1px solid #dddddd;
+    font-size: 0.9rem;
   }
-i {
-    font-size: 18px;
-    margin-right: 10px;
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    position: relative;
+    padding: 8px;
 }
-/* ************************************** For the notes styles ************************************** */
+th{
+    background-color: #dddddd;
+}
+tr:nth-child(odd) {
+    background-color: #f4f4f4;
+    position: relative;
+}
+.messageRequest{
+    border: #ddd 1px solid;
+    font-size: 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+    width: 90%;
+    padding: 5px;
+    margin: 10px;
+}
+h4{
+    font-size: 2rem;
+}
+.copyBtn{
+    border:white solid 0px;
+    background-color: inherit;
+    color: #212529;
+    position: relative;
+}
+.codeContainerHeader{
+    display: flex;
+    justify-content: space-between;
+    padding:10px 0px 10px 20px;
+    background-color: #ddd;
+    border-radius: 10px 10px 0px 0px;
+}
+.codeContainer{
+    background-color: #f5f2f0;
+    border-radius: 10px 10px 0px 0px;
+    margin-top: 5px;
+
+
+}
+.codeLang{
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #fafafa;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 3px;
+    width: fit-content;
+}
+/* ************************************************* Request and Respons Examples ********************************************* */
+.exampleRequestRespons{
+    background-color: #fafafa;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.divTitle{
+    text-align: center;
+}
+.tab {
+  overflow: hidden;
+}
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 3px;
+    transition: 0.3s;
+    font-size: 15px;
+}
+.tab button:hover {
+  background-color: #aaa;
+}
+
+.tab button.active {
+border-bottom: orange 4px solid ;
+}
+
+.tabcontent {
+  display: none;
+  padding: 10px;
+  border-top: none;
+}
+
+
+/* ************************************** Notes styles ************************************** */
 .note ,.errorHandling ,.warning ,.information ,.done{
     position: relative;
     width: 95%;
@@ -140,105 +292,36 @@ i {
     margin-top: 15px;
     margin-bottom: 15px;
     display: flex;
+    overflow-wrap: anywhere;
 }
 .note{
-    background-color: #f0c2e0 ;
-    border-left: 4px #b82e8a solid;
+    background-color: #ffe4f6 ;
+    border-left: 4px #cb76af solid;
 }
 .errorHandling{
-    background-color: #ffb3b3 ;
-    border-left: 4px #ff0000 solid;
+    background-color: #fdd7d7 ;
+    border-left: 4px #ff4141 solid;
 }
 .warning{
     background-color: #ffe6b3 ;
     border-left: 4px #ffaa00 solid;
 }
 .information{
-    background-color: #ccccff ;
-    border-left: 4px #0000ff solid;
+    background-color: #e3e3f7 ;
+    border-left: 4px #6161ff solid;
 }
 .done{
-    background-color: #b3ffb3 ;
-    border-left: 4px #009900 solid;
+    background-color: #d8f7d8 ;
+    border-left: 4px #5eaf5e solid;
 }
-/* ************************************** end notes styles ************************************** */
-
-.rotate {
-    transform: rotate(90deg);
-}
-.github-link{
-    border: #aaa solid 0.5px;
-    border-radius: 5px;
-    padding: 2px;
-    padding-top: 4px;
-    box-shadow: 1px 1px #aaa ;
-}
-.active-link {
-    text-decoration: underline !important;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
-    position: relative;
-    width: 100%;
-  }
-  
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    position: relative;
-
-    padding: 8px;
+i{
+    font-size: 18px;
+    margin-right: 10px;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-    position: relative;
-}
-.messageRequest{
-    border: #ddd 1px solid;
-    font-size: 14px;
-    font-family: 'Courier New', Courier, monospace;
-    width: 90%;
-    padding: 5px;
-    margin: 10px;
-}
-
-h4{
-    font-size: 20px;
-}
-.copyBtn{
-    border:white solid 0px;
-    background-color: #ffffff;
-    color: #212529;
-    position: relative;
-    left: 95%; 
-}
-#showNavBarBtn{
-    display: none;
-    background-color: white;
-    border: white solid 0px;
-    position: absolute;
-    top:10px;
-    left:10px;
-}
-#hideNavBarBtn{
-    display: none;
-    background-color: #212529;
-    border: #212529 solid 0px;
-    position: absolute;
-    display: flex;
-    color: white;
-    font-size: 15px;
-    top: 10px;
-    left: 10px;
-}
-/* ******************************************* media screen ********************************************** */
+/* ***************************************** Media Queries********************************************** */
 /* ************************************** for small screens ******************************************** */
 @media screen and (max-width: 376px) {
-/* p {
-    background-color: lightblue;
-} */
 .forLongWords{
     display: block;
 }
@@ -255,15 +338,17 @@ h4{
     display: none;
     background-color: #212529;
     border: #212529 solid 0px;
-    position: absolute;
+    position: relative;
     display: flex;
-    color: white;
     font-size: 15px;
-    top: 10px;
-    left: 10px;
+    top: -20px;
+
 }
 .sideNav{
-    display: none;
+    /* display: none; */
+    left:-500px;
+    transition: 300ms;
+
 }
 #viewPage{
     width: 100%;
@@ -272,27 +357,15 @@ h4{
     top:10%;
     left: 0%;
     padding-bottom: 20px;
+    overflow: unset;
 }
 .banner{
     margin-bottom: 30px ;
     width: 100%;
 }
-.messageRequest{
-    overflow: scroll;
-}
-.longString{
-    overflow: scroll;
-}
-.warning{
-    overflow: scroll;
-}
-
 }
 /* ************************************** for medium screens ******************************************** */
 @media screen and (min-width: 376px) and (max-width : 800px){
-/* p {
-    background-color: lightblue;
-} */
 .forLongWords{
     display: block;
 }
@@ -314,7 +387,9 @@ h4{
     height: 20px;
 }
 .sideNav{
-    display: none;
+    /* display: none; */
+    left:-500px;
+    transition: 300ms;
 }
 #viewPage{
     width: 100%;
@@ -328,16 +403,6 @@ h4{
 .banner{
     margin-bottom: 30px ;
     width: 100%;
-}
-
-.messageRequest{
-    overflow: scroll;
-}
-.longString{
-    overflow: scroll;
-}
-.warning{
-    overflow: scroll;
 }
 }
 /* ************************************** for large screens ******************************************** */
@@ -369,7 +434,7 @@ h4{
     display: block;
     float: left;
     height: 100%;
-    min-width: fit-content;
+    min-width: 350px;
     background: #212529;
     padding-top: 40px;
     position: fixed;
@@ -383,4 +448,3 @@ h4{
     }
 }
 
-    

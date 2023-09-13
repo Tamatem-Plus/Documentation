@@ -20,14 +20,282 @@
         </ol>
         <p class="textDescription">We also added an inventory list API so your game can align on status of its purchased inventory.</p>
     </div>
+
+
+
+    <div class="component">
+        <h4>Login API</h4>
+        <p class="textDescription">The game server should make the following request to get authenticated<br><b>Here is an example:</b></p>
+        
+            <p class="messageRequest">{{scheme}}://{{url}}/api/o/token/</p>
+            <p>Body</p>
+            
+            <div class="codeContainer">
+                <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('getTokenBodyCode','getTokenBodyCodeBtn')" class="copyBtn" id="getTokenBodyCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                </div>
+                <div class="codeDiv">
+            <pre><code class="language-javascript" id="getTokenBodyCode">{
+    "grant_type":"client_credentials",
+    "client_id":"mAr6jytqXhpUHXDCCOR5Gdbj0QLSWwVNlGRExWOZ",
+    "redirect_uri":"coe://oauth-callback",
+    "response": "code",
+    "client_secret":"NOz1fHFE7WXHk1nw4jJB7aXzEnVvgcPIP67X0ul8ABN7leC8rBx2cjP0LBtbm4JgyWbdufApkPwPQaPjIXV0CXpwDakBs8nKTOIg9dWlVvW3u4zuUtUoJijKbNpilxCE",
+    "scope":"customer:read"
+}</code></pre>
+</div>
+</div>
+            <div class="exampleRequestRespons">
+                <p class="divTitle"><b>Success Get Token | grant_type | authorization_code</b></p>
+                <span class="example_Req_Res">Example Request:</span>
+                <div class="codeContainer">
+                            <div class="codeContainerHeader"><span class="codeLang">curl</span><button onclick="copyDivToClipboard('successGetTokenReq','successGetTokenReqBtn')" class="copyBtn" id="successGetTokenReqBtn"><i class="fa-solid fa-copy"></i></button>
+                            </div>
+                            <div class="codeDiv">
+                        <pre><code class="language-javascript" id="successGetTokenReq">curl --location -g '{{scheme}}://{{url}}/api/o/get-token/' \
+--data '{
+    "grant_type":"authorization_code",
+    "code":"M9XRdXmpIq2bMbTypsdqzUYsko03ki",
+    "code_verifier":"asdasdasd2",
+    "client_id":"pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz",
+    "redirect_uri":"game1://oauth-callback",
+    "response_type":"code",
+    "scope":"customer:read"
+}'</code></pre>
+</div>
+</div>
+                <span class="example_Req_Res">Example Response:</span>
+                <div class="tab">
+                    <button class="successGetTokenBtn active" onclick="openTab(event, 'successGetTokenBodyDiv' , 'successGetTokenHeadersDiv' , 'successGetTokenBtn')">Body</button>
+                    <button class="successGetTokenBtn" onclick="openTab(event, 'successGetTokenHeadersDiv' ,  'successGetTokenBodyDiv' , 'successGetTokenBtn')">Headers</button>
+                  </div>
+                  
+                  <div id="successGetTokenBodyDiv" class="tabcontent active" style="display: block;">
+                    <div class="codeContainer">
+                        <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('successGetTokenBodyCode','successGetTokenBodyCodeBtn')" class="copyBtn" id="successGetTokenBodyCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+                        <div class="codeDiv">
+                    <pre><code class="language-javascript" id="successGetTokenBodyCode">{
+    "access_token": "hg5ATE4DJILcouEfR26v9h48PP41B6",
+    "expires_in": 36000,
+    "token_type": "Bearer",
+    "scope": "introspection scoop:read app:read app:write customer:read customer:write game:read game:write",
+    "refresh_token": "n5iPSXyWS3ar8F0TyeL4E53Y84lWIg"
+}</code></pre>
+</div>
+</div>
+                  </div>
+                  
+                  <div id="successGetTokenHeadersDiv" class="tabcontent">
+                    <table>
+                        <tr>
+                            <td>Date</td>
+                            <td>Fri, 10 Jun 2022 11:27:25 GMT</td>
+                        </tr>
+                        <tr>
+                            <td>Content-Type</td>
+                            <td>application/json</td>
+                        </tr>
+                        <tr>
+                            <td>Content-Length</td>
+                            <td>252</td>
+                        </tr>
+                        <tr>
+                            <td>Connection</td>
+                            <td>keep-alive</td>
+                        </tr>
+                        <tr>
+                            <td>Cache-Control</td>
+                            <td>no-store</td>
+                        </tr>
+                        <tr>
+                            <td>Pragma</td>
+                            <td>no-cache</td>
+                        </tr>
+                        <tr>
+                            <td>X-Frame-Options</td>
+                            <td>DENY</td>
+                        </tr>
+                        <tr>
+                            <td>Vary</td>
+                            <td>Accept-Language, Origin</td>
+                        </tr>
+                        <tr>
+                            <td>Content-Language</td>
+                            <td>en</td>
+                        </tr>
+                        <tr>
+                            <td>X-Content-Type-Options</td>
+                            <td>nosniff</td>
+                        </tr>
+                        <tr>
+                            <td>Referrer-Policy</td>
+                            <td>same-origin</td>
+                        </tr>
+                        <tr>
+                            <td>Strict-Transport-Security</td>
+                            <td>max-age=15724800; includeSubDomains</td>
+                        </tr>
+                    </table>
+                  </div>
+            </div>
+            <p><b>Params Description</b></p>
+            <table>
+                <tr>
+                    <td>grant_type</td>
+                    <td>static value "client_credentials"</td>
+                </tr>
+                <tr>
+                    <td>client_id</td>
+                    <td>as sent from Tamatem Admin</td>
+                </tr>
+                <tr>
+                    <td>redirect_uri</td>
+                    <td>as set previously</td>
+                </tr>
+                <tr>
+                    <td>response</td>
+                    <td>static value “code”</td>
+                </tr>
+                <tr>
+                    <td>client_secret</td>
+                    <td>as sent from Tamatem Admin</td>
+                </tr>
+                <tr>
+                    <td>scope</td>
+                    <td>static value “customer:read”</td>
+                </tr>
+            </table>
+
+        </div><br>
     <div class="component">
         <h4>Verify API</h4>
-        <p class="textDescription">In the following steps is an outline for the verification flow using game server request call into platform server:</p>
+        <p class="textDescription">The verify API requires two parameters sent as query params in the url, which are as follows:</p>
         <ol>
             <li class="">Inventory item ID.</li>
             <li class="">The verification token.</li>
         </ol>
-        <p class="textDescription">Besides that the authentication token as retrieved from the login API should be sent in Authorization, here is a <a href="https://documenter.getpostman.com/view/7016233/VUjPGQQE#320febce-d96d-40f0-bd0d-3a6bf369b5d5" target="_blank">postman example</a></p>
+        <p class="textDescription">Besides that the authentication token as retrieved from the login API should be sent in Authorization.<br><b>Here is an example:</b></p>
+            <p class="messageRequest">{{scheme}}://{{url}}/api/inventory/verify/:inventoryItemID/:verificationToken/</p>
+            <table>
+                <tr>
+                    <th colspan="2">HEADERS</th>
+                </tr>
+                <tr>
+                    <td>Authorization</td>     
+                    <td>Bearer 3Mj8K4IlJjPcn5o2EFleA5hw2byGly</td>     
+                </tr>
+                <tr>
+                    <th colspan="2">PATH VARIABLES</th>
+                </tr>
+                <tr>
+                    <td>inventoryItemID</td>     
+                    <td>50391dd7-026f-4793-a710-ae9014019cbb</td>     
+                </tr>
+                <tr>
+                    <td>verificationToken</td>     
+                    <td>TwmqnDZ1Sl8nf8Q0z8XidUNw39T-pM1mcb-RaberwMc</td>     
+                </tr>
+                <tr>
+                    <th colspan="2">Body</th>
+                </tr>
+                <tr>
+                    <td colspan="2"><div class="codeContainer">
+                        <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('VerifyBodyCode','VerifyBodyCodeBtn')" class="copyBtn" id="VerifyBodyCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+                        <div class="codeDiv">
+                    <pre><code class="language-javascript" id="VerifyBodyCode">{
+    "is_verified":true
+}</code></pre>
+</div>
+</div>
+                </td>        
+                </tr>
+            </table>
+            <div class="exampleRequestRespons">
+                <p class="divTitle"><b>Verifiy</b></p>
+                <span class="example_Req_Res">Example Request:</span>
+                <div class="codeContainer">
+                            <div class="codeContainerHeader"><span class="codeLang">curl</span><button onclick="copyDivToClipboard('verfyReq','verfyReqBtn')" class="copyBtn" id="verfyReqBtn"><i class="fa-solid fa-copy"></i></button>
+                            </div>
+                            <div class="codeDiv">
+                        <pre><code class="language-javascript" id="verfyReq">curl --location -g --request PUT '{{scheme}}://{{url}}/api/inventory/verify/11/UKS9BEyrWiCjTGVohWVycQgtKN4S9PqUrORF0EhMrCM/' \
+--header 'Authorization: Bearer pIvhxUeH8PxxO4Tw9TWqkU6vwgoAol' \
+--data '{
+    "is_verified":true
+}'</code></pre>
+</div>
+</div>
+                <span class="example_Req_Res">Example Response:</span>
+                <div class="tab">
+                    <button class="VerifyBtn active" onclick="openTab(event, 'verifyBodyDiv' , 'verifyHeadersDiv' , 'VerifyBtn')">Body</button>
+                    <button class="VerifyBtn" onclick="openTab(event, 'verifyHeadersDiv' ,  'verifyBodyDiv' , 'VerifyBtn')">Headers</button>
+                  </div>
+                  
+                  <div id="verifyBodyDiv" class="tabcontent active" style="display: block;">
+                    <div class="codeContainer">
+                        <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('verifyBodyCode','verifyBodyCodeBtn')" class="copyBtn" id="verifyBodyCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+                        <div class="codeDiv">
+                    <pre><code class="language-javascript" id="verifyBodyCode">{
+"results": {
+    "is_verified": true,
+    "game_saved_data": {
+    "exampleKey1": "exampleValue1",
+    "exampleKey2": "exampleValue2",
+    "exampleKey...": "exampleValue...etc"
+    }
+},
+"status_code": 200
+}</code></pre>
+</div>
+</div>
+                  </div>
+                  
+                  <div id="verifyHeadersDiv" class="tabcontent">
+                    <table>
+                        <tr>
+                            <td>Date</td>
+                            <td>Tue, 26 Jul 2022 10:52:49 GMT</td>
+                        </tr>
+                        <tr>
+                            <td>Server</td>
+                            <td>WSGIServer/0.2 CPython/3.8.13</td>
+                        </tr>
+                        <tr>
+                            <td>Content-Type</td>
+                            <td>application/json</td>
+                        </tr>
+                        <tr>
+                            <td>Allow</td>
+                            <td>PUT, PATCH, OPTIONS</td>
+                        </tr>
+                        <tr>
+                            <td>X-Frame-Options</td>
+                            <td>DENY</td>
+                        </tr>
+                        <tr>
+                            <td>Content-Length</td>
+                            <td>167</td>
+                        </tr>
+                        <tr>
+                            <td>Vary</td>
+                            <td>Accept-Language, Origin</td>
+                        </tr>                       
+                        <tr>
+                            <td>Content-Language</td>
+                            <td>en</td>
+                        </tr>
+                        <tr>
+                            <td>X-Content-Type-Options</td>
+                            <td>nosniff</td>
+                        </tr>
+                        <tr>
+                            <td>Referrer-Policy</td>
+                            <td>same-origin</td>
+                        </tr>
+                    </table>
+                  </div>
+            </div>
         </div>
         <div class="component">
             <h3 class="title">Inventory Items API</h3>
@@ -84,6 +352,6 @@
                     <td>If the item is verified by a server-to-server signing action - mentioned in the webhook signed response</td>
                 </tr>
             </table>
-
+        </div>
     </body>
 </html>

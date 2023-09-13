@@ -37,7 +37,7 @@
                 <ul class="ol-warning">
                     <li class="">Client ID is your game id into Tamatem Plus system, we will provide you with once integration starts.
                     </li>
-                    <li class="" style="overflow-wrap: break-word;">Redirect URI: The link is the game link where the user will be redirected back after finishing the authorization process to continue
+                    <li class="" >Redirect URI: The link is the game link where the user will be redirected back after finishing the authorization process to continue
                         the journey. For a better user experience, we would recommend you use the following format (companynamegamename://companyname).</li>
                 </ul>
             </div>
@@ -56,7 +56,10 @@
                     <br>
                     <img src="images/AndroidPublishingSettings.png" alt="" style="width: 90%; margin-bottom: 20px;">
                 </li>
-                <button onclick="copyDivToClipboard('XMLCode','XMLCodeBtn')" class="copyBtn" id="XMLCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                <div class="codeContainer">
+                    <div class="codeContainerHeader"><span class="codeLang">XML</span><button onclick="copyDivToClipboard('XMLCode','XMLCodeBtn')" class="copyBtn" id="XMLCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                    </div>
+                    <div class="codeDiv">
                 <!-- for the XML code the (`&lt` == `<`) and the (`&gt`==`>`) -->
                 <pre><code class="language-markup" id="XMLCode">&ltintent-filter&gt
     &ltaction android:name ="android.intent.action.VIEW" /&gt
@@ -64,6 +67,8 @@
     &ltcategory android:name ="android.intent.category.BROWSABLE" /&gt
     &ltdata android:scheme="companyname-gamename" android:host="companyname"/&gt
 &lt/intent-filter&gt </code></pre>
+</div>
+</div>
                 <div class="warning" >
                     <i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>
                     Do not forget to replace the “companyname-gamename” and the “companyname” with the actual info that you used in the redirect

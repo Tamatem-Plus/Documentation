@@ -1,3 +1,10 @@
+const sideNavBar = document.getElementById("sideNavBar");
+const showNavBarBtn = document.getElementById("showNavBarBtn");
+const hideNavBarBtn = document.getElementById("hideNavBarBtn");
+const invisible = document.getElementById("invisible");
+const viewPage = document.getElementById("viewPage");
+
+
 function showList(e, divID) {
   e.stopPropagation();
   let arrowImg;
@@ -58,20 +65,20 @@ function navigate(e, url) {
     });
 }
 
-function copyFunction() {
-  // Get the text field
-  var copyText = document.getElementById("incorrectCredentials").innerHTML;
+// function copyFunction() {
+//   // Get the text field
+//   var copyText = document.getElementById("incorrectCredentials").innerHTML;
 
-  // Select the text field
-  copyFunction.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
+//   // Select the text field
+//   copyFunction.select();
+//   copyText.setSelectionRange(0, 99999); // For mobile devices
 
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
+//   // Copy the text inside the text field
+//   navigator.clipboard.writeText(copyText.value);
   
-  // Alert the copied text
-  alert("Copied the text: " + copyText.value);
-}
+//   // Alert the copied text
+//   alert("Copied the text: " + copyText.value);
+// }
 //! Copy Content of dev
 // const myTimeout = setTimeout(myGreeting, 1000);
 function copyDivToClipboard(id,buttonId) {
@@ -95,24 +102,50 @@ function copyDivToClipboard(id,buttonId) {
     console.error(error)
   }
 }
+// function myMove() {
+//   let id = null;
+//   const elem = document.getElementById("sideNavBar"); 
+//   elem.style.width='0px'  
+//   let wid = 0;
+//   clearInterval(id);
+//   id = setInterval(frame, 5);
+//   function frame() {
+//     if (wid == 350) {
+//       clearInterval(id);
+//     } else {
+//       wid++; 
+//       elem.style.width = wid + "px";  
+//     }
+//   }
+// }
+
 function showNavBar(){
-  document.getElementById("sideNavBar").style.display='block';
-  document.getElementById("showNavBarBtn").style.display='none';
-  document.getElementById("hideNavBarBtn").style.display='block';
-  document.getElementById("invisible").style.display='block';
-  document.getElementById("viewPage").style.height = '100%';
-  document.getElementById("viewPage").style.overflow = 'hidden';
-
-
-
+  // sideNavBar.style.display='block';
+  sideNavBar.style.left='0px';
+  showNavBarBtn.style.display='none';
+  hideNavBarBtn.style.display='block';
+  invisible.style.display='block';
+  viewPage.style.height = '100%';
+  viewPage.style.overflow = 'hidden';
 }
 function hideNavBar(){
-  document.getElementById("sideNavBar").style.display='none';
-  document.getElementById("showNavBarBtn").style.display='block';
-  document.getElementById("hideNavBarBtn").style.display='none';
-  document.getElementById("invisible").style.display='none';
-  document.getElementById("viewPage").style.height = 'auto';
-  document.getElementById("viewPage").style.overflow = 'scroll';
-  // document.getElementById("viewPage").style;
+  sideNavBar.style.left= '-500px';  
+  showNavBarBtn.style.display='block';
+  hideNavBarBtn.style.display='none';
+  invisible.style.display='none';
+  viewPage.style.height = 'auto';
+  viewPage.style.overflow = 'unset';
+}
 
+
+function openTab(evt, tabToShow , tabToHide , buttonClass) {
+  let shownTab = document.getElementById(tabToShow);
+  let hidenTab = document.getElementById(tabToHide);
+  buttonLink = document.getElementsByClassName(buttonClass);
+  for (i = 0; i < buttonLink.length; i++) {
+    buttonLink[i].className = buttonLink[i].className.replace(" active", "");
+  }
+  shownTab.style.display= "block";
+  hidenTab.style.display= "none";
+  evt.currentTarget.className += " active";
 }

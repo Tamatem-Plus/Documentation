@@ -29,7 +29,10 @@
     </div>
     <div class="component">
         <h3 class="title">Full Code Snippet for the minimum integration</h3>
-        <button onclick="copyDivToClipboard('integrationFullCode','integrationFullCodeBtn')" class="copyBtn" id="integrationFullCodeBtn"><i class="fa-solid fa-copy"></i></button>
+        <div class="codeContainer">
+            <div class="codeContainerHeader"><span class="codeLang">C#</span><button onclick="copyDivToClipboard('integrationFullCode','integrationFullCodeBtn')" class="copyBtn" id="integrationFullCodeBtn"><i class="fa-solid fa-copy"></i></button>
+            </div>
+            <div class="codeDiv">
         <pre class="language-csharp"><code class="language-csharp" id="integrationFullCode">using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -104,9 +107,11 @@ public class SceneReferencesScript : MonoBehaviour
     }
 }
 </code></pre>
+</div>
+</div>
         <div class="warning"><i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>Don’t forget to include the TamatemConnect namespace</div>
         <h4>Error handling</h4>
-        <div class="errorHandling"><i class="fa-solid fa-circle-xmark" style="color: #ff0000;"></i>When you use TamatemConnectPlugin.Instance.RedeemAllItems(), you need to check whether the call was a success or not. In
+        <div class="errorHandling"><i class="fa-solid fa-circle-xmark" style="color: #ff4141;"></i>When you use TamatemConnectPlugin.Instance.RedeemAllItems(), you need to check whether the call was a success or not. In
             the previous code snippet, we show you how to do that.</div>
 </div> 
 </body>
