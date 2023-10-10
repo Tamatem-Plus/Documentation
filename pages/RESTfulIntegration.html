@@ -70,6 +70,49 @@
                 returns access & refresh tokens & user info object</li>
             <li class=""><b>Header</b><br>
                 {“Content-Type”: “application/json” }</li>
+
+                <li class=""><b>Request Body</b><br>Properties:
+                    <table>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                        </tr>
+                        <tr>
+                            <td>code</td>
+                            <td>as generated from Step A</td>
+                        </tr>
+                        <tr>
+                            <td>client_id</td>
+                            <td style="overflow-wrap: anywhere;">string, as set after game creation will be available in portal game details for example ‘pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz’</td>
+                        </tr>
+                        <tr>
+                            <td>response_type</td>
+                            <td>Static value of ‘code’</td>
+                        </tr>
+                        <tr>
+                            <td>redirect_uri</td>
+                            <td>string, redirect url as set on game creation on portal for example ‘game1://oauth-callback’</td>
+                        </tr>
+                        <tr>
+                            <td>code_verifier</td>
+                            <td>string, as generated code challenge for example ‘the other generated code as in guide’</td>
+                        </tr>
+                        <tr>
+                            <td>code_challenge_method</td>
+                            <td>Static value of ‘S256’</td>
+                        </tr>
+                        <tr>
+                            <td>grant_type</td>
+                            <td>Static value of ‘authorization_code’</td>
+                        </tr>
+                        <tr>
+                            <td>scope</td>
+                            <td>Static value of ‘read write’</td>
+                        </tr>
+                    </table>
+                    </li>
+
+
             <li class=""><b>Response</b><br>
                 <div>Success (Responses Status : 200)</div>
                 <div class="codeContainer">
@@ -127,49 +170,63 @@
 </div>
 </div>
 </li>
-            <li class=""><b>Request Body</b><br>Properties:
+            
+        </ul>
+<br>
+    </div>
+
+    <li class=""><b>POST   /api/player/set-player-id/:</b><br>
+        connects the player to the game</li>
+    <li class=""><b>Header</b><br>
+        {“Content-Type”: “application/json” }</li>
+
+        <li class=""><b>Request Body</b><br>Properties:
             <table>
                 <tr>
                     <th>Field Name</th>
                     <th>Type</th>
                 </tr>
                 <tr>
-                    <td>code</td>
-                    <td>as generated from Step A</td>
-                </tr>
-                <tr>
-                    <td>client_id</td>
-                    <td style="overflow-wrap: anywhere;">string, as set after game creation will be available in portal game details for example ‘pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz’</td>
-                </tr>
-                <tr>
-                    <td>response_type</td>
-                    <td>Static value of ‘code’</td>
-                </tr>
-                <tr>
-                    <td>redirect_uri</td>
-                    <td>string, redirect url as set on game creation on portal for example ‘game1://oauth-callback’</td>
-                </tr>
-                <tr>
-                    <td>code_verifier</td>
-                    <td>string, as generated code challenge for example ‘the other generated code as in guide’</td>
-                </tr>
-                <tr>
-                    <td>code_challenge_method</td>
-                    <td>Static value of ‘S256’</td>
-                </tr>
-                <tr>
-                    <td>grant_type</td>
-                    <td>Static value of ‘authorization_code’</td>
-                </tr>
-                <tr>
-                    <td>scope</td>
-                    <td>Static value of ‘read write’</td>
+                    <td>player_id</td>
+                    <td>String</td>
                 </tr>
             </table>
             </li>
-        </ul>
 
-    </div>
+    <li class=""><b>Response</b><br>
+        <div>Success (Responses Status : 200)</div>
+       
+</code></pre>
+</div>
+</div>
+        <div>Incorrect credentials (Reponses Status : 400)</div>
+        <div class="codeContainer">
+            <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('incorrectCredentials','incorrectCredentialsBtn')" class="copyBtn" id="incorrectCredentialsBtn"><i class="fa-solid fa-copy"></i></button>
+            </div>
+            <div class="codeDiv">
+        <pre><code class="language-javascript" id="incorrectCredentials">{
+"error": "invalid_grant",
+"error_description": "Invalid credentials given."
+}</code></pre>
+</div>
+</div>
+        <div>Incorrect request (Reponses Status : 400)</div>
+        <div class="codeContainer">
+            <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('incorrectRequest','incorrectRequestBtn')" class="copyBtn" id="incorrectRequestBtn"><i class="fa-solid fa-copy" ></i></button>
+            </div>
+            <div class="codeDiv">
+        <pre><code class="language-javascript" id="incorrectRequest">{
+"error": "unsupported_grant_type"
+}</code></pre>
+</div>
+</div>
+<br>
+</li>
+  
+</ul>
+
+</div>
+<br>
     <div class="component">
         <h3 class="title">Resource APIs</h3>
         <ul>
