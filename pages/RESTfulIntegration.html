@@ -556,8 +556,31 @@
                     </table>
                   </div>
             </div>
-     
+            <li class=""><b>POST   /player/logout/:</b><br>
+                logs the user out</li>
+            <li class=""><b>Header</b><br>
+                {“Content-Type”: “application/json” }
+                {"Authorization": "Bearer "}
 
+                <span class="example_Req_Res">Example Response:</span>
+                <div class="tab">
+                    <button class="redeemBtn active" onclick="openTab(event, 'redeemBodyDiv' , 'redeemHeadersDiv','redeemBtn')">Body</button>
+                    <button class="redeemBtn" onclick="openTab(event, 'redeemHeadersDiv' , 'redeemBodyDiv', 'redeemBtn')">Headers</button>
+                  </div>
+                  
+                  <div id="redeemBodyDiv" class="tabcontent" style="display: block;">
+                    <div class="codeContainer">
+                        <div class="codeContainerHeader"><span class="codeLang">JSON</span><button onclick="copyDivToClipboard('redeemBodyCode','redeemBodyCodeBtn')" class="copyBtn" id="redeemBodyCodeBtn"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+                        <div class="codeDiv">
+                    <pre><code class="language-javascript" id="redeemBodyCode">{
+    "results": {},
+    "status_code": 200
+}</code></pre>
+                
+            </li>
+
+          
 
         </ul>
         <div class="note"><i class="fa-solid fa-note-sticky" style="color: #cb76af;"></i>Games that have no backends can rely on this to change the status of an item and rely on Tamatem portal data regarding items and their statuses, on the other hand, games that have a game backend can implement a more secure method of handling this change using a server to server APIs.</div>
