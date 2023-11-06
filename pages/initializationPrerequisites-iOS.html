@@ -20,13 +20,13 @@
         <h6 style="margin-top:30px;">IDENTIFIER</h6>
         <p style="margin-left: 30px; margin-bottom:30px;">The identifier distinguishes your app from others in case multiple apps declare support for the same scheme. Using your app’s bundle ID as a prefix is best practice, but it doesn’t prevent any other apps from registering the same scheme. If multiple apps register the same scheme, the app the system targets will be undefined. You should consider using Universal Links instead if uniqueness becomes essential.</p> 
         <h6>URL SCHEMES</h6>
-        <p style="margin-left: 30px;">Specifies the URL scheme to use for opening links in your app.In this case, we’ve configured our app to handle URLs starting with tamatem-testkuwait://You will get yours from us.</p>
+        <p style="margin-left: 30px;">Specifies the URL scheme to use for opening links in your app.In this case, we’ve configured our app to handle URLs starting with companyname-gamename://You will get yours from us.</p>
     
         <h4 style="margin-top: 50px;">Implement Info plist configuration file.</h4>
         <p>Tamatem SDK depends on some predefined keys to get important values to run the SDK.In your project root directory create a new plist file and name it “TamatemConfiguration”and fill it with the following keys:</p>
         <ul>
             <li>Client ID is your game ID into the Tamatem Plus system, which we will provide you with once integration starts.</li>
-            <li>Redirect URI: The link is the game link where the user will be redirected back after finishing the authorization process to continue the journey. For a better user experience, we would recommend you use the following format (companyName-gameName://companyName).</li>
+            <li>Redirect URI: The link is the game link where the user will be redirected back after finishing the authorization process to continue the journey. For a better user experience, we would recommend you use the following format (companyname-gamename://companyname).</li>
             <li>Base URL: To start testing the SDK, please use our staging environment URL "https://stg-be.tamatemplus.com/".</li>
         </ul>
         <img src="images/iOS-config.png" alt="" style="width: 100%; margin-bottom: 20px;display: block;
