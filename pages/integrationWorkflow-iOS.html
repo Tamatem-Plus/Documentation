@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+</head>
+
+<body>
+    <div class="component">
+        <h3 class="title">Integration Workflow:</h3>
+        <p>The developer should start any process by calling the public functions and then listening to the callbacks or delegates. When using the Tamatem Plus SDK, you have to at least use the following four functions:</p>
+        <h4>Integration Workflow (Minimum Requirements):</h4>
+        <ol>
+            <li>You need to start by connecting the user to Tamatem Plus, or you will not be able to use the other functions.</li>
+            <pre class="language-javascript"><code class="language-javascript">TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.Connect()</code></pre>
+            <li>You need to get the inventory to know which items purchased by the player on Tamatem Plus will be redeemed. This will help you know what you need to give the user inside your game after you redeem their items on Tamatem Plus.</li>
+            <pre class="language-javascript"><code class="language-javascript">TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.getInventoryItems(isRedeemed: false, completion: { inventoryItems in
+    // Any action you would to take.
+})</code></pre>
+            <li>This needs to be called after you get the inventory items to redeem them on Tamatem Plus. Please take a look at the following example:</li>
+            <pre class="language-javascript"><code class="language-javascript">TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?..redeemAllItems(completion: { success in
+    // Any action you would to take.
+})</code></pre>
+            <li>If the user is connected with Tamatem ID, please call the Logout function wherever your logout logic exists to disconnect the user Tamatem ID.</li>
+            <pre class="language-javascript"><code class="language-javascript">TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.logout(completion: { success in
+    // Any action you would to take.
+})</code></pre>
+        </ol>
+
+        <h4 style="margin-top: 50px;">Initialize the TamatemConnectPlugin</h4>
+        <p>We provide a unified interface to access all features and handle the callbacks.</p>
+        <p>After you have the SDK in your application and set up the app properties, the next step is to set the delegate for the Tamatem connect plugin. A Client is a singleton object that acts as a bridge between your application and the Tamatem platform. It includes all the methods and properties you need to run.</p>
+
+        <div class="codeContainer">
+            <div class="codeContainerHeader">
+                <span class="codeLang">SwiftUI</span>
+                <button onclick="copyDivToClipboard('integrationFullCode','integrationFullCodeBtn')" class="copyBtn" id="integrationFullCodeBtn"><i class="fa-solid fa-copy"></i></button>
+            </div>
+            <div class="codeDiv">
+                <pre class="language-swift"><code class="language-swift">import SwiftUI
+import TamatemPlusiOSFramework
+
+struct ConnectView: View {
+    @ObservedObject private var delegate: TamatemPluginDelegate
+    
+    init(delegate: TamatemPluginDelegate) {
+        self.delegate = delegate
+    }
+    
+    var body: some View {
+        VStack() {
+            Button("Connect ID") {
+                guard delegate.isConnected == .NOT_CONNECTED else{
+                    return
+                }
+                TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.delegate = delegate
+                TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.connect() // start connecting proccess
+            }
+        }
+    }
+}</code></pre></div></div>
+
+<div class="codeContainer" style="margin-top: 30px;">
+    <div class="codeContainerHeader">
+        <span class="codeLang">Swift</span>
+        <button onclick="copyDivToClipboard('integrationFullCode','integrationFullCodeBtn')" class="copyBtn" id="integrationFullCodeBtn"><i class="fa-solid fa-copy"></i></button>
+    </div>
+    <div class="codeDiv">
+        <pre class="language-swift"><code class="language-swift">class MainViewController {
+    func viewDidLoad {
+      ...
+      TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.delegate = self
+      TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.connect() // start connecting proccess
+    }
+}</code></pre></div></div>
+        <p style="margin-top: 40px;">You should implement 2 delegate methods in the class that is provided as a delegate class.</p>
+        <div class="codeDiv">
+            <pre class="language-javascript"><code class="language-javascript">func onRedirectToApp()
+func onConnected(didSucceed:Bool)
+</code></pre></div>
+
+        <p style="margin-top: 20px;">func onRedirectToApp():
+            <br> to inform you that we went back to the app from the Tamatem authentication page.
+        </p>
+        <p>func onConnected(didSucceed:Bool):
+        <br>Used to inform you about the authentication status if succeeds or not after trying to get a token.
+        </p>
+        <p></p>Also in your app delegate or scene, you must handle the app reopening after being redirected from the Tamatem authentication page and call the following method to continue the Authentication process; otherwise, the user will not be authenticated and connected.</p>
+        <div class="warning">
+            <i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>
+            Make Sure that you set the deep linking in your app.
+        </div>
+        <div class="warning">
+            <i class="fa-solid fa-triangle-exclamation" style="color: #ffaa00;"></i>
+            Make Sure that the TamatemConfiguration.plist exists and it’s at the root of your app.
+        </div>
+        <h4 style="margin-top: 40px;">Handle redirecting to the App:</h4>
+        <div class="codeDiv" style="margin-top: 20px;">
+            <pre class="language-javascript"><code class="language-javascript">func handleOAuthCallback(url: String)</code></pre>
+        </div>
+        <p style="margin-top: 30px;">AppDelegate:</p>
+        <div class="codeDiv">
+            <pre class="language-javascript"><code class="language-javascript">func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    handleOAuthCallback(url: url)
+}</code></pre></div>
+        <p style="margin-top: 30px;">AppScene:</p>
+        <div class="codeDiv">
+            <pre class="language-javascript"><code class="language-javascript">func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    guard let url = URLContexts.first?.url else{
+       return
+    }
+    handleOAuthCallback(url: url)
+}</code></pre></div>
+        <p style="margin-top: 30px;">In SwiftUI you can handle it from the main app class inside the windowGroup like this example:</p>
+        <div class="codeDiv">
+            <pre class="language-javascript"><code class="language-javascript">@main
+struct TamatemPlusSampleSceneApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+            .onOpenURL { incomingURL in
+                TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.handleOAuthCallback(url: incomingURL.absoluteString)
+            }
+        }
+    }
+}</code></pre></div>
+        <p style="padding-top: 40px;">After finishing the initialization you can now compose and connect the TamatemConnectPlugin functions to your app elements.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+</head>
+
+<body>
+    <div class="component">
+        <h3 class="title">Available Functions & Callbacks:</h3>
+        <p>Tamatem Plus SDK allows you to connect your users with the Tamatem ID through our public functions. The following functions can be used by accessing the singleton instance 
+            <br>“TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?”:
+        </p>
+        <ol>
+            <li><b>connect</b>: to connect the user to Tamatem Plus. You can use the callback function <ins>onConnected(didSucceed: Bool) </ins>
+                 to handle connection success or failure status. You can also use the callback function onRedirectedToApp() to place any logic needed when the user is redirected to the app during the connection process.</li>
+            <li><b>checkConnectionStatus</b>: Call <ins>checkConnectionStatus(completion: { success in … </ins> 
+                to check if the user is connected or not. The status returned in the callback.</li>
+            <li><b>getInventoryItems</b>: Call <ins>getInventoryItems(completion: { inventoryItems in … </ins>
+                 to get All the items purchased by the user on Tamatem Plus (redeemed items and unredeemed items).</li>
+            <li><b>getInventoryItems(isRedeemed: Bool)</b>: Call <ins>TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.getInventoryItems(isRedeemed: true, completion: { inventoryItems in … </ins>
+                 to get the items purchased by the user on Tamatem Plus. Send “true” to get the redeemed items, and “false” to get the unredeemed items.</li>
+            <li><b>redeemAllItems</b>: Call <ins>TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.redeemAllItems(completion: {success in … </ins> to redeem all items.</li>
+            <li><b>getUserInfo</b>: Call <ins>TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.getUserInfo(completion: {success, user in … </ins> to get the user data from Tamatem Plus.</li>
+            <li><b>logout</b>: Call <ins>TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance?.logout(completion: { success in … </ins>
+                 to clear the Tamatem user session and clear the stored data on the device (Please note that this will NOT delete the stored data from Tamatem Plus records).</li>
+        </ol>
+        <div class="information">
+            <i class="fa-solid fa-circle-info" style="color: #6161ff;"></i>
+            You can find an example script to check out how these functions are used in the GitHub release.</div>
+        </div>
+        <h4 style="margin-top: 50px;">You are done!</h4>
+        <div class="done">
+            <i class="fa-solid fa-circle-check" style="color:  #5eaf5e;"></i>
+            Now you can provide your players with an outstanding experience while letting us do the heavy lifting for you.
+            </div>
+        <h4>Note</h4>
+        <div class="note"><i class="fa-solid fa-note-sticky" style="color: #cb76af;" ></i>Please note that the current base URL used is for our testing environment. When you are done with the implementation and everything is
+            working well with you, please contact us to provide you with our production base URL.</div>    
+    </div>
+</body>
+</html>

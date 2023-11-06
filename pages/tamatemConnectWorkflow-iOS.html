@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tamatem Document</title>
+</head>
+
+<body>
+    <div class="component">
+        <h3 class="title">TamatemConnect Workflow? How TamatemConnect works?</h3>
+        <p>This is a brief look at the workflow</p>
+        <ol>
+            <li>Call the public function <ins>“TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance.Connect()”</ins>.</li>
+            <li>The public function call function at the TamatemConnect Plugin.</li>
+            <li>The plugin requests the service from the Tamatem Plus Portal.</li>
+            <li>Tamatem Plus Portal responds with state or retrieved data.</li>
+            <li>when the user returns to the app you should call 
+                <ins>“TamatemPlusiOSFramework.TamatemConnectPlugin.sharedInstance.handleOAuthCallback(url: incomingURL.absoluteString)”</ins>
+                to pass the received data to the plugin</li>
+            <li>The TamatemConnect plugin sends back the state or retrieved data.</li>
+            <li>You can now use the other SDK functions.</li>
+        </ol>
+    </div>
+</body>
+</html>
