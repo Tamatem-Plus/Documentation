@@ -58,9 +58,10 @@
         
         </div>
         <p class="title">Example</p>
-        <div class="messageRequest">https://alphabe.tamatemplus.com/api/o/authorize?client_id=pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz&response_type=code&redirect_uri=game1://oauth-callback&code_challenge=yTQcr3uzpPhNddaTDWRjXP3vwD0UmNro0PUloyll08o&code_challenge_method=S256</div>
+        <div class="messageRequest">https://stg-be.tamatemplus.com/api/o/authorize?client_id=pi4dEipJyFLDbO9DOYWFlolNpOgzjjYI2oq0qVJz&response_type=code&redirect_uri=game1://oauth-callback&code_challenge=yTQcr3uzpPhNddaTDWRjXP3vwD0UmNro0PUloyll08o&code_challenge_method=S256</div>
         <div class="note"><i class="fa-solid fa-note-sticky" style="color: #cb76af;"></i><div>The authorization requires a code challenge to identify that both step requests are from the same source as per oAuth security recommendations, follow <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow-with-pkce#create-code-verifier" target="_blank">this guide</a> for the generation of code challenge & code verifier.</div></div>
-        <div class="information"><i class="fa-solid fa-circle-info" style="color: #6161ff;"></i>Tamatem Portal afterward will redirect the user back to the game redirect URI containing authorization code as a query parameter “code”</div>
+        <div class="note"><i class="fa-solid fa-note-sticky" style="color: #cb76af;"></i><div>For the best user experience, please open the browser in full-screen mode so the user is able to see the whole authorization page.</div></div>
+        <div class="information"><i class="fa-solid fa-circle-info" style="color: #6161ff;"></i>Tamatem Portal afterward will redirect the user back to the game redirect URI containing authorization code as a query parameter “code”.</div>
         
         <h4>STEP 2 (Exchange authorization code)</h4>
         <p>This API call is triggered by Step 1 as a redirect back to the game, the redirect contains an authorization code, and the game should implement the logic of consuming the received authorization code besides making the API as documented below, here is an example:</p>
